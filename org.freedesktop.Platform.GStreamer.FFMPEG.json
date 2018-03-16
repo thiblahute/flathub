@@ -1,0 +1,45 @@
+{
+    "id": "org.freedesktop.Platform.GStreamer.FFMPEG",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.26",
+    "build-extension": true,
+    "sdk": "org.gnome.Sdk",
+    "separate-locales": false,
+    "appstream-compose": false,
+    "modules": [
+        {
+            "name": "gst-ffmpeg",
+            "builddir": true,
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Ddisable_gtkdoc=true",
+                "--prefix=/usr/lib/extensions/gstreamer-1.0/FFMPEG"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.12.4.tar.xz",
+                    "sha256": "2a56aa5d2d8cd912f2bce17f174713d2c417ca298f1f9c28ee66d4aa1e1d9e62"
+                }
+            ],
+            "post-install": [
+                "mv /usr/lib/extensions/gstreamer-1.0/FFMPEG/lib/gstreamer-1.0/libgstlibav.so /usr/lib/extensions/gstreamer-1.0/FFMPEG/",
+                "rm -Rf /usr/lib/extensions/gstreamer-1.0/FFMPEG/lib/"
+            ]
+        },
+        {
+            "name": "appdata",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/appdata org.freedesktop.Platform.GStreamer.FFMPEG.appdata.xml",
+                "appstream-compose --basename=org.freedesktop.Platform.GStreamer.FFMPEG --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Platform.GStreamer.FFMPEG"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "org.freedesktop.Platform.GStreamer.FFMPEG.appdata.xml"
+                }
+            ]
+        }
+    ]
+}

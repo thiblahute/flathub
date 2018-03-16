@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="runtime">
+  <id>org.freedesktop.Platform.GStreamer.FFMPEG</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>GStreamer ffmpeg plugin</name>
+  <summary>GStreamer ffmpeg plugin</summary>
+  <description><p>The GStreamer ffmpeg plugin wraps the codecs provided by FFMPEG and thus enables encoding and decoding of many files format in GStreamer.</p></description>
+</component>
