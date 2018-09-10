@@ -1,0 +1,30 @@
+app-id: net.baseart.Glide
+runtime: org.gnome.Platform
+runtime-version: '3.28'
+sdk: org.gnome.Sdk
+sdk-extensions:
+- org.freedesktop.Sdk.Extension.rust-stable
+command: glide
+finish-args:
+- --share=network
+- --share=ipc
+- --device=dri
+- --socket=x11
+- --socket=wayland
+- --filesystem=home
+- --talk-name=ca.desrt.dconf
+- --filesystem=xdg-run/dconf
+- --filesystem=~/.config/dconf:ro
+- --env=DCONF_USER_CONFIG_DIR=.config/dconf
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/glide/cargo
+modules:
+- name: glide
+  buildsystem: meson
+  sources:
+  - type: archive
+    url: "https://github.com/philn/glide/releases/download/0.5.1/glide-0.5.1.tar.xz"
+    sha256: "47064587c376659f6ad3b724a4ad9c932da9ade1d52cd24105cb38ba11982ed7"
+
